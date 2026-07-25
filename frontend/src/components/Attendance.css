@@ -1,0 +1,766 @@
+/* ═══════════════════════════════════════════════════════════════
+   ATTENDANCE — "Soft Cloud" Theme
+   Light, clean, professional student dashboard
+   Nunito (UI) + Fira Code (numbers)
+   Layout: 4-stat strip → [subjects | detail stacked over mini-cal]
+═══════════════════════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap");
+
+/* ── Design Tokens ── */
+:root {
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --surface-2: #f7f8fa;
+  --surface-3: #eef0f3;
+
+  --border: #e3e6eb;
+  --border-2: #d1d5db;
+
+  --text-1: #111827;
+  --text-2: #4b5563;
+  --text-3: #9ca3af;
+
+  --teal: #0d9488;
+  --teal-soft: #ccfbf1;
+  --teal-border: #5eead4;
+
+  --blue: #2563eb;
+  --blue-soft: #dbeafe;
+  --blue-border: #93c5fd;
+
+  --rose: #e11d48;
+  --rose-soft: #ffe4e6;
+  --rose-border: #fda4af;
+
+  --amber: #d97706;
+  --amber-soft: #fef3c7;
+
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --green-border: #86efac;
+
+  --violet: #7c3aed;
+  --violet-soft: #ede9fe;
+
+  --font: "Nunito", sans-serif;
+  --mono: "Fira Code", monospace;
+
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 14px;
+  --radius-xl: 18px;
+
+  --shadow-s: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-m: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+
+  --ease: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --att-track: #e3e6eb;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ══════════════════
+   ROOT
+══════════════════ */
+.att-root {
+  font-family: var(--font);
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--text-1);
+  padding: 20px 20px 40px;
+}
+
+/* ══════════════════
+   PAGE HEADER
+══════════════════ */
+.att-page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.att-page-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+}
+.att-page-sub {
+  font-size: 0.7rem;
+  color: var(--text-3);
+  font-family: var(--mono);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+
+/* ══════════════════
+   INSIGHT STRIP
+══════════════════ */
+.att-insights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.att-insight {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  padding: 14px 16px 11px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-s);
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease);
+}
+.att-insight:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-m);
+}
+
+/* Colored left bar */
+.att-insight::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: var(--radius-l) 0 0 var(--radius-l);
+}
+.att-insight-blue::before {
+  background: var(--blue);
+}
+.att-insight-red::before {
+  background: var(--rose);
+}
+.att-insight-teal::before {
+  background: var(--teal);
+}
+.att-insight-amber::before {
+  background: var(--amber);
+}
+
+.att-insight-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.att-insight-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-3);
+}
+.att-insight-period {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text-3);
+  background: var(--surface-2);
+  padding: 1px 6px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+.att-insight-val {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--text-1);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.att-spark {
+  width: 100%;
+  height: 22px;
+  display: block;
+  margin-bottom: 4px;
+}
+.att-spark-blue polyline {
+  stroke: var(--blue);
+  opacity: 0.5;
+}
+.att-spark-red polyline {
+  stroke: var(--rose);
+  opacity: 0.5;
+}
+.att-spark-teal polyline {
+  stroke: var(--teal);
+  opacity: 0.5;
+}
+.att-spark-amber polyline {
+  stroke: var(--amber);
+  opacity: 0.5;
+}
+.att-insight-change {
+  font-size: 0.66rem;
+  color: var(--text-3);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════
+   MAIN GRID
+   Left column: subject list (fixed 268px)
+   Right column: detail card + calendar stacked
+══════════════════════════════════════════ */
+.att-main-grid {
+  display: grid;
+  grid-template-columns: 268px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+/* Right stacks detail on top, calendar below */
+.att-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Shared card base */
+.att-panel,
+.att-detail,
+.att-cal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-s);
+}
+
+/* ══════════════════
+   SUBJECT LIST
+══════════════════ */
+.att-panel {
+  overflow: hidden;
+}
+
+.att-panel-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.att-panel-hdr h3 {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-2);
+}
+.att-panel-count {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  background: var(--teal-soft);
+  color: var(--teal);
+  border: 1px solid var(--teal-border);
+  border-radius: 20px;
+  padding: 1px 7px;
+  font-weight: 600;
+}
+
+.att-subj-list {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.att-subj-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--radius-m);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition:
+    background var(--ease),
+    border-color var(--ease);
+}
+.att-subj-row:hover {
+  background: var(--surface-3);
+}
+.att-subj-row--active {
+  background: var(--teal-soft) !important;
+  border-color: var(--teal-border) !important;
+}
+
+.att-subj-ring {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.att-subj-ring svg {
+  position: absolute;
+  inset: 0;
+}
+.att-subj-ring-pct {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  font-weight: 600;
+}
+
+.att-subj-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.att-subj-code {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.att-subj-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.att-subj-meta {
+  font-family: var(--mono);
+  font-size: 0.57rem;
+  color: var(--text-3);
+}
+.att-subj-badge {
+  flex-shrink: 0;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+/* ══════════════════
+   DETAIL CARD
+══════════════════ */
+.att-detail {
+  padding: 18px;
+}
+
+.att-detail-hdr {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.att-detail-code {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--teal);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+.att-detail-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+}
+
+.att-detail-ring {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+.att-detail-ring svg {
+  position: absolute;
+  inset: 0;
+}
+.att-detail-ring-pct {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.att-detail-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.att-detail-stat {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition:
+    background var(--ease),
+    transform var(--ease);
+}
+.att-detail-stat:hover {
+  background: var(--surface-3);
+  transform: translateY(-1px);
+}
+
+.att-detail-val {
+  font-family: var(--mono);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.att-green {
+  color: var(--green);
+}
+.att-red {
+  color: var(--rose);
+}
+.att-blue {
+  color: var(--blue);
+}
+.att-purple {
+  color: var(--violet);
+}
+
+.att-detail-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.att-detail-prog {
+  margin-bottom: 14px;
+}
+.att-detail-bar {
+  height: 7px;
+  background: var(--surface-3);
+  border-radius: 99px;
+  position: relative;
+  border: 1px solid var(--border);
+  overflow: visible;
+}
+.att-detail-fill {
+  height: 100%;
+  border-radius: 99px;
+  position: relative;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.att-detail-fill::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: inherit;
+  border: 2px solid white;
+  box-shadow: var(--shadow-s);
+}
+.att-detail-marker {
+  position: absolute;
+  left: 75%;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--amber);
+  border-radius: 2px;
+  opacity: 0.75;
+}
+.att-detail-marker::before {
+  content: "75%";
+  position: absolute;
+  top: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--amber);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.att-detail-bar-lbls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-family: var(--mono);
+  font-size: 0.57rem;
+  color: var(--text-3);
+}
+.att-min-lbl {
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.att-warn,
+.att-safe {
+  padding: 10px 13px;
+  border-radius: var(--radius-m);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.att-warn {
+  background: var(--rose-soft);
+  color: var(--rose);
+  border: 1px solid var(--rose-border);
+}
+.att-safe {
+  background: var(--green-soft);
+  color: var(--green);
+  border: 1px solid var(--green-border);
+}
+
+/* ══════════════════════════════════════════
+   MINI CALENDAR
+   Key: fixed 28px row height, NOT aspect-ratio
+   This prevents the giant cell problem
+══════════════════════════════════════════ */
+.att-cal {
+  padding: 14px 14px 12px;
+}
+
+.att-cal-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.att-cal-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+.att-cal-title strong {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-1);
+}
+.att-cal-title span {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-3);
+}
+
+.att-cal-nav {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition:
+    background var(--ease),
+    color var(--ease),
+    border-color var(--ease);
+}
+.att-cal-nav:hover {
+  background: var(--teal-soft);
+  border-color: var(--teal-border);
+  color: var(--teal);
+}
+
+/* Day-of-week labels */
+.att-cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+.att-cal-day-lbl {
+  text-align: center;
+  font-size: 0.57rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-3);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+
+/* *** THE FIX: fixed height cells, never aspect-ratio *** */
+.att-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 28px; /* fixed row height — compact! */
+  gap: 2px;
+}
+
+.att-cal-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  border-radius: var(--radius-s);
+  color: var(--text-2);
+  transition: background var(--ease);
+  position: relative;
+  /* NO aspect-ratio here */
+}
+.att-cal-empty {
+  pointer-events: none;
+}
+
+.att-cal-p {
+  background: var(--teal-soft);
+  color: var(--teal);
+  font-weight: 700;
+}
+.att-cal-p::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.att-cal-a {
+  background: var(--rose-soft);
+  color: var(--rose);
+  font-weight: 700;
+}
+
+.att-cal-today {
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-weight: 800;
+  box-shadow: 0 0 0 1.5px var(--blue-border);
+}
+
+/* Legend */
+.att-cal-legend {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.att-cal-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  color: var(--text-3);
+  font-weight: 600;
+}
+.att-leg {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.att-leg-p {
+  background: var(--teal);
+}
+.att-leg-a {
+  background: var(--rose);
+}
+.att-leg-t {
+  background: var(--blue);
+}
+
+/* ══════════════════
+   LOADING
+══════════════════ */
+.att-loading {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-3);
+  font-size: 0.8rem;
+  font-family: var(--font);
+}
+.att-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--teal);
+  border-radius: 50%;
+  animation: att-spin 0.7s linear infinite;
+}
+@keyframes att-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ══════════════════
+   RESPONSIVE
+══════════════════ */
+@media (max-width: 1024px) {
+  .att-insights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .att-main-grid {
+    grid-template-columns: 240px 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .att-root {
+    padding: 12px 10px 32px;
+  }
+  .att-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .att-insights {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .att-detail-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .att-page-header {
+    flex-wrap: wrap;
+  }
+}

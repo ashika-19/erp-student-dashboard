@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <body>
+    <h2>Test Add Student</h2>
+    <button onclick="addStudent()">Add Test Student</button>
+    <button onclick="getStudents()">Get Students</button>
+    <pre id="result"></pre>
+
+    <script>
+      async function getStudents() {
+        const res = await fetch("http://localhost:5000/api/students");
+        const data = await res.json();
+        document.getElementById("result").innerText = JSON.stringify(
+          data,
+          null,
+          2,
+        );
+      }
+
+      async function addStudent() {
+        const res = await fetch("http://localhost:5000/api/students", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            student_id: "TEST" + Date.now(),
+            name: "Test Student",
+            email: "test" + Date.now() + "@test.com",
+            phone: "1234567890",
+            department: "CS",
+            semester: 1,
+            admission_date: "2024-01-01",
+            address: "Test Address",
+          }),
+        });
+        const data = await res.json();
+        document.getElementById("result").innerText = JSON.stringify(
+          data,
+          null,
+          2,
+        );
+        getStudents();
+      }
+    </script>
+  </body>
+</html>

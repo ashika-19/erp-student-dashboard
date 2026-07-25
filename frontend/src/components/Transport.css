@@ -1,0 +1,614 @@
+/* ═══════════════════════════════════════════════
+   BUS ROUTE & TRANSPORT INFO — Transport.css
+   Matches StudentDashboard / Attendance style
+═══════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap");
+
+.tp-root {
+  font-family: "Nunito", sans-serif;
+  color: #111827;
+  padding-bottom: 40px;
+}
+
+/* ══════════════════════════════
+   PAGE HEADER
+══════════════════════════════ */
+.tp-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tp-page-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111827;
+  margin-bottom: 3px;
+}
+.tp-page-sub {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  font-family: "Fira Code", monospace;
+}
+
+.tp-status-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+.tp-status--active {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+.tp-status--maintenance {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+.tp-status--inactive {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+/* ══════════════════════════════
+   TOP INFO CARDS GRID
+══════════════════════════════ */
+.tp-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tp-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.tp-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Colored left border per card */
+.tp-card--bus {
+  border-left: 3px solid #6366f1;
+}
+.tp-card--route {
+  border-left: 3px solid #0284c7;
+}
+.tp-card--pickup {
+  border-left: 3px solid #16a34a;
+}
+.tp-card--year {
+  border-left: 3px solid #d97706;
+}
+
+.tp-card-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  border-radius: 10px;
+  border: 1px solid #f3f4f6;
+}
+
+.tp-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.tp-card-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #9ca3af;
+}
+.tp-card-value {
+  font-family: "Fira Code", monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tp-card-sub {
+  font-size: 0.65rem;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ══════════════════════════════
+   MAIN 2-COL GRID
+══════════════════════════════ */
+.tp-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 14px;
+  align-items: start;
+}
+
+.tp-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Shared panel/card base */
+.tp-panel,
+.tp-contact-card,
+.tp-map-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ══════════════════════════════
+   STOPS LIST (LEFT)
+══════════════════════════════ */
+.tp-panel-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px 11px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #fafafa;
+}
+.tp-panel-hdr h3 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #374151;
+}
+.tp-panel-count {
+  font-family: "Fira Code", monospace;
+  font-size: 0.62rem;
+  background: #e0f2fe;
+  color: #0284c7;
+  border: 1px solid #bae6fd;
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.tp-stops-list {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each stop row */
+.tp-stop-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 6px;
+  border-radius: 10px;
+  transition: background 0.12s;
+}
+.tp-stop-row:hover {
+  background: #f9fafb;
+}
+.tp-stop-row--mine {
+  background: #f0fdf4 !important;
+}
+.tp-stop-row--past {
+  opacity: 0.55;
+}
+
+/* Timeline */
+.tp-timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 28px;
+}
+.tp-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  border: 2px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #6b7280;
+  flex-shrink: 0;
+  font-family: "Fira Code", monospace;
+}
+.tp-dot--mine {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff;
+  font-size: 0.7rem;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+.tp-dot--end {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
+}
+.tp-line {
+  width: 2px;
+  flex: 1;
+  min-height: 18px;
+  background: #e5e7eb;
+  margin: 2px 0;
+}
+
+/* Stop info */
+.tp-stop-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 3px;
+}
+.tp-stop-name-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.tp-stop-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #111827;
+}
+.tp-my-stop-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  background: #d1fae5;
+  color: #065f46;
+  padding: 1px 7px;
+  border-radius: 20px;
+  border: 1px solid #6ee7b7;
+}
+.tp-origin-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  background: #ede9fe;
+  color: #5b21b6;
+  padding: 1px 7px;
+  border-radius: 20px;
+}
+.tp-dest-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 1px 7px;
+  border-radius: 20px;
+}
+.tp-landmark {
+  font-size: 0.68rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+/* Stop timings */
+.tp-stop-times {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+  padding-top: 3px;
+}
+.tp-time-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.tp-time-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #9ca3af;
+  letter-spacing: 0.06em;
+}
+.tp-time-val {
+  font-family: "Fira Code", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════
+   DRIVER / CONDUCTOR CARDS (RIGHT)
+══════════════════════════════ */
+.tp-contact-hdr {
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #fafafa;
+}
+.tp-contact-hdr h3 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #374151;
+}
+
+.tp-contact-body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+}
+.tp-contact-avatar {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid #e5e7eb;
+}
+.tp-contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.tp-contact-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #111827;
+}
+.tp-contact-phone {
+  font-size: 0.78rem;
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.12s;
+}
+.tp-contact-phone:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+.tp-contact-license {
+  font-family: "Fira Code", monospace;
+  font-size: 0.64rem;
+  color: #6b7280;
+}
+
+/* ══════════════════════════════
+   ROUTE MAP CARD (RIGHT)
+══════════════════════════════ */
+.tp-map-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tp-map-route {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 10px 6px;
+}
+
+.tp-map-point {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.tp-map-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #6366f1;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px #6366f1;
+}
+.tp-map-dot--end {
+  background: #16a34a;
+  box-shadow: 0 0 0 2px #16a34a;
+}
+.tp-map-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #374151;
+  text-align: center;
+  max-width: 60px;
+  line-height: 1.2;
+}
+
+/* Middle stops on map */
+.tp-map-middle-stops {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  height: 20px;
+}
+.tp-map-middle-stops::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #16a34a);
+  border-radius: 2px;
+}
+.tp-map-mid-stop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+.tp-map-mid-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d1d5db;
+  border: 1.5px solid #ffffff;
+  transition: background 0.15s;
+}
+.tp-map-mid-dot--mine {
+  background: #f59e0b;
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+}
+.tp-map-mid-label {
+  position: absolute;
+  top: -18px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #f59e0b;
+  white-space: nowrap;
+}
+
+/* Google Maps button */
+.tp-maps-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 14px;
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #86efac;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: "Nunito", sans-serif;
+  transition:
+    background 0.15s,
+    transform 0.15s;
+}
+.tp-maps-btn:hover {
+  background: #dcfce7;
+  transform: translateY(-1px);
+}
+
+/* ══════════════════════════════
+   LOADING / ERROR / EMPTY
+══════════════════════════════ */
+.tp-loading,
+.tp-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  gap: 10px;
+  color: #9ca3af;
+  font-size: 0.84rem;
+  text-align: center;
+}
+.tp-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid #e5e7eb;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: tp-spin 0.7s linear infinite;
+}
+@keyframes tp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tp-error-icon {
+  font-size: 3rem;
+}
+.tp-error h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #374151;
+  margin: 0;
+}
+.tp-error p {
+  color: #6b7280;
+  margin: 0;
+}
+.tp-error small {
+  color: #9ca3af;
+}
+.tp-retry-btn {
+  margin-top: 6px;
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Nunito", sans-serif;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 1024px) {
+  .tp-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tp-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .tp-info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .tp-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .tp-card {
+    padding: 12px;
+    gap: 10px;
+  }
+}

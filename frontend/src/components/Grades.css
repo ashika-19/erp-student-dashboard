@@ -1,0 +1,544 @@
+/* ═══════════════════════════════════════════════
+   GRADES & MARKS REPORT CARD — Grades.css
+   Matches StudentDashboard / Attendance style
+═══════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap");
+
+/* ── Root ── */
+.gr-root {
+  font-family: "Nunito", sans-serif;
+  color: #111827;
+  padding-bottom: 40px;
+}
+
+/* ══════════════════════════════
+   PAGE HEADER
+══════════════════════════════ */
+.gr-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gr-page-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111827;
+  margin-bottom: 3px;
+}
+
+.gr-page-sub {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  font-family: "Fira Code", monospace;
+}
+
+/* Download button */
+.gr-download-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #111827;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: "Nunito", sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    transform 0.15s,
+    opacity 0.15s;
+  white-space: nowrap;
+}
+.gr-download-btn:hover:not(:disabled) {
+  background: #1f2937;
+  transform: translateY(-1px);
+}
+.gr-download-btn:disabled,
+.gr-download-btn--loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ══════════════════════════════
+   SEMESTER FILTER TABS
+══════════════════════════════ */
+.gr-sem-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.gr-sem-tab {
+  background: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.gr-sem-tab:hover {
+  border-color: #d1d5db;
+  color: #374151;
+  background: #f9fafb;
+}
+.gr-sem-tab--active {
+  background: #111827;
+  color: #ffffff;
+  border-color: #111827;
+}
+
+/* ══════════════════════════════
+   SUMMARY CARDS
+══════════════════════════════ */
+.gr-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.gr-sum-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+.gr-sum-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.gr-sum-card--gpa {
+  border-left: 3px solid #6366f1;
+}
+.gr-sum-card--pass {
+  border-left: 3px solid #22c55e;
+}
+
+.gr-sum-label {
+  font-size: 0.63rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #9ca3af;
+}
+.gr-sum-value {
+  font-family: "Fira Code", monospace;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.gr-sum-sub {
+  font-size: 0.65rem;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+/* ══════════════════════════════
+   TABLE CARD
+══════════════════════════════ */
+.gr-table-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
+}
+
+.gr-table-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #fafafa;
+}
+.gr-table-hdr h3 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #374151;
+}
+.gr-table-count {
+  font-family: "Fira Code", monospace;
+  font-size: 0.65rem;
+  background: #e0f2fe;
+  color: #0284c7;
+  border: 1px solid #bae6fd;
+  border-radius: 20px;
+  padding: 2px 9px;
+  font-weight: 600;
+}
+
+.gr-table-wrap {
+  overflow-x: auto;
+}
+
+.gr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.gr-table thead th {
+  background: #f9fafb;
+  color: #6b7280;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.gr-table tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.12s;
+}
+.gr-table tbody tr:hover {
+  background: #f9fafb;
+}
+.gr-table tbody tr:last-child {
+  border-bottom: none;
+}
+.gr-row--fail {
+  background: #fff7f7;
+}
+.gr-row--fail:hover {
+  background: #fef2f2;
+}
+
+.gr-table td {
+  padding: 10px 14px;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.gr-td-num {
+  color: #9ca3af;
+  font-family: "Fira Code", monospace;
+  font-size: 0.72rem;
+}
+.gr-td-center {
+  text-align: center;
+}
+.gr-td-name {
+  font-weight: 600;
+  color: #111827;
+  max-width: 200px;
+}
+
+.gr-code {
+  font-family: "Fira Code", monospace;
+  font-size: 0.72rem;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Total marks */
+.gr-total {
+  font-family: "Fira Code", monospace;
+  font-weight: 600;
+  color: #111827;
+}
+.gr-max {
+  font-family: "Fira Code", monospace;
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+/* Percentage bar */
+.gr-pct-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.gr-pct-bar {
+  flex: 1;
+  height: 5px;
+  background: #f3f4f6;
+  border-radius: 99px;
+  overflow: hidden;
+  min-width: 50px;
+}
+.gr-pct-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+.gr-pct-val {
+  font-family: "Fira Code", monospace;
+  font-size: 0.72rem;
+  color: #374151;
+  white-space: nowrap;
+  min-width: 38px;
+  text-align: right;
+}
+
+/* Grade badge */
+.gr-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+.gr-o {
+  background: #d1fae5;
+  color: #065f46;
+}
+.gr-ap {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.gr-a {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+.gr-bp {
+  background: #fef3c7;
+  color: #92400e;
+}
+.gr-b {
+  background: #ffedd5;
+  color: #9a3412;
+}
+.gr-c {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.gr-f {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+/* Grade points */
+.gr-points {
+  font-family: "Fira Code", monospace;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #374151;
+}
+
+/* Result */
+.gr-result {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.gr-result--pass {
+  background: #d1fae5;
+  color: #065f46;
+}
+.gr-result--fail {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Table footer */
+.gr-tfoot-row {
+  background: #f9fafb;
+  border-top: 2px solid #e5e7eb;
+}
+.gr-tfoot-label {
+  font-weight: 700;
+  color: #374151;
+  font-size: 0.78rem;
+  padding: 10px 14px;
+}
+.gr-tfoot-val {
+  font-family: "Fira Code", monospace;
+  font-weight: 700;
+  color: #111827;
+  font-size: 0.82rem;
+}
+
+/* ══════════════════════════════
+   GPA CHART CARD
+══════════════════════════════ */
+.gr-gpa-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.gr-gpa-grid {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 20px 24px 12px;
+  min-height: 120px;
+}
+
+.gr-gpa-sem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.gr-gpa-sem:not(.gr-gpa-sem--active) {
+  opacity: 0.6;
+}
+.gr-gpa-sem--active {
+  opacity: 1;
+}
+
+.gr-gpa-sem-bar-wrap {
+  display: flex;
+  align-items: flex-end;
+  height: 80px;
+}
+.gr-gpa-sem-bar {
+  width: 32px;
+  border-radius: 6px 6px 0 0;
+  transition: height 0.6s ease;
+  min-height: 4px;
+}
+.gr-gpa-sem-val {
+  font-family: "Fira Code", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.gr-gpa-sem-label {
+  font-size: 0.65rem;
+  color: #9ca3af;
+  font-weight: 700;
+}
+
+.gr-gpa-cumulative {
+  padding: 10px 24px 14px;
+  border-top: 1px solid #f3f4f6;
+  font-size: 0.78rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+.gr-gpa-cumulative strong {
+  font-family: "Fira Code", monospace;
+  font-size: 1rem;
+  color: #111827;
+  font-weight: 700;
+}
+
+/* ══════════════════════════════
+   STATES: Loading / Error / Empty
+══════════════════════════════ */
+.gr-loading,
+.gr-error,
+.gr-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 12px;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.gr-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid #e5e7eb;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: gr-spin 0.7s linear infinite;
+}
+@keyframes gr-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gr-error-icon {
+  font-size: 2rem;
+}
+.gr-error p {
+  color: #374151;
+  font-weight: 600;
+}
+.gr-retry-btn {
+  margin-top: 4px;
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Nunito", sans-serif;
+}
+
+.gr-empty span {
+  font-size: 2.5rem;
+}
+.gr-empty p {
+  font-weight: 600;
+  color: #374151;
+}
+.gr-empty small {
+  color: #9ca3af;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 900px) {
+  .gr-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .gr-summary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .gr-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .gr-table {
+    font-size: 0.75rem;
+  }
+}
